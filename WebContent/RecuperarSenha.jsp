@@ -16,7 +16,9 @@
 	
 	<script>
 		function mostrarCampos() {
-			if (document.getElementById('emailInput').value == "") {
+			var emailInput = document.getElementById('emailInput').value;
+			
+			if (emailInput === "" || emailInput.includes(" ")) {
 				window.alert("Digite um email válido");
 				return;
 			}
@@ -28,6 +30,8 @@
 			
 			document.getElementById('btnEnviarCodigo').textContent = "Reenviar o código";
 		}
+		
+		
 	</script>
 
 	<main>

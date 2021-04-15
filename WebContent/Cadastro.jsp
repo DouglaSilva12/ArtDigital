@@ -20,6 +20,26 @@
     	function trocarLabel($i) {
     		document.getElementById('inputCpfCnpj').placeholder = $i;
     	}
+    	
+    	function verificarSenha() {
+			if (document.getElementById('passwordInput').value.length < 8) {
+				window.alert("Sua senha deve conter mais de 8 caracteres.");
+				return;
+			}
+		}
+    	
+    	function verificarCampos($param) {
+			var input = document.getElementById($param).value;
+			
+			for (let index = 0; index < emailInput.length++; index++) {
+				input = input.replace(" ","");
+			}
+			
+			if (input === "") {
+				window.alert("Algum dos valores está vazio.");
+				return;
+			}
+		}
     </script>
     
     <main>
@@ -31,7 +51,7 @@
         <form action="" method="post" class="row g-3 justify-content-center mx-auto" style="max-width: 750px;">
           <label class="form-label">Informações de Usuario</label>
           <div class="col-md-8">
-            <input type="text" class="form-control" id="inputName" placeholder="Nome" required>
+            <input type="text" class="form-control" id="inputName" placeholder="Nome" onblur="" required>
           </div>
           <div class="col-md-4">
             <div class="input-group">
@@ -85,7 +105,7 @@
           <div class="col-12">
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
               <button class="btn btn-outline-secundary" onclick="history.back()">Voltar</button>
-              <button type="submit" class="btn btn-outline-primary">Continuar</button>
+              <button type="submit" class="btn btn-outline-primary" onclick="verificarSenha()">Continuar</button>
             </div>
           </div>
         </form>
