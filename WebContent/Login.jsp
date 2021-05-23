@@ -16,6 +16,17 @@
     
     <script type="text/javascript">
     	document.getElementById('headerButtonLogin').classList.add("disabled");
+    	
+    	<%
+    	boolean atributo = (boolean) session.getAttribute("cadastradoSucesso");
+    	
+    	if (atributo) {
+    		%>
+    		alert("Usuario criado com sucesso!");
+    		<%
+    		session.setAttribute("cadastradoSucesso", false);
+    	}
+    	%>
     </script>
     
     <main class="flex-shrink-0">
@@ -24,12 +35,12 @@
           <h1>Entrar</h1>
           <p>Digite suas credenciais para entrar no sistema!</p>
         </div>
-        <form action="" method="post" class="row g-3 justify-content-center mx-auto" style="max-width: 500px;">
+        <form action="./ProcessarLogin.jsp" method="post" class="row g-3 justify-content-center mx-auto" style="max-width: 500px;">
           <div class="col-md-12">
-            <input type="email" class="form-control" id="emailInput" placeholder="Email" required>
+            <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Email" required>
           </div>
           <div class="col-md-12">
-            <input type="password" class="form-control" id="passwordInput" placeholder="Senha" required>
+            <input type="password" class="form-control" id="passwordInput" name="passwordInput" placeholder="Senha" required>
           </div>
           <div class="col-md-12 text-center">
           	<a href="./RecuperarSenha.jsp" class="text-decoration-none">Esqueci minha senha!</a>
