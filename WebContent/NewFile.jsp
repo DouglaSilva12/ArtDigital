@@ -15,30 +15,10 @@
 <body>
 	<p>Lista usuarios</p>
 	<%
-	List<Usuario> usuarios = UsuarioDAO.listarUsuarios();
-	
-	for (Usuario usuario : usuarios) {
-		out.println(usuario);
+	for (Usuario usuario : UsuarioDAO.listarUsuarios()) {
+		out.println(usuario + "<br>");
 	}
 	%>
 	<hr />
-	<p>Procurar por id 1</p>
-	<%
-	Usuario usuario1 = UsuarioDAO.procurarUsuario(1);
-	
-	out.println(usuario1);
-	%>
-	<hr />
-	<p>Criar usuario</p>
-	<%
-	Usuario usuario2 = new Usuario("Aaa","Aaaaa","Aaaa","Aaaa",0,"Aaaa","Aaaa",null,Date.valueOf(LocalDate.of(1999, 12, 31)));
-	
-	if (UsuarioDAO.criarUsuario(usuario2)) {
-		out.println("Usuario criado com sucesso");
-		out.println(usuario2);
-	} else {
-		out.println("Falha ao criar usuario");
-	}
-	%>
 </body>
 </html>
