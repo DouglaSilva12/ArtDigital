@@ -95,9 +95,9 @@ public abstract class UsuarioDAO {
 						usuarioDataNasc
 				);
 				usuario.setId(usuarioId);
-				
-				ConexaoBanco.desconectaBanco();
 			}
+
+			ConexaoBanco.desconectaBanco();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -105,13 +105,13 @@ public abstract class UsuarioDAO {
 		return usuario;
 	}
 
-	public static boolean criarUsuario(Usuario usuario) {
+	public static boolean criarUsuario(Usuario usuario, String senha) {
 		boolean criadoSucesso = false;
 		
 		try {
 			Connection conexaoBanco = ConexaoBanco.conectaBanco();
 			
-			String sql = "INSERT INTO `USUARIO` VALUES (default,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO `USUARIO` VALUES (default,?,?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement statement = conexaoBanco.prepareStatement(sql);
 			statement.setString(1, usuario.getNome());
@@ -123,6 +123,7 @@ public abstract class UsuarioDAO {
 			statement.setString(7, usuario.getCpf());
 			statement.setString(8, usuario.getCnpj());
 			statement.setDate(9, usuario.getDataNasc());
+			statement.setString(10, senha);
 			
 			int result = statement.executeUpdate();
 			
@@ -136,5 +137,104 @@ public abstract class UsuarioDAO {
 		}
 		
 		return criadoSucesso;
+	}
+	
+	public static Usuario procurarUsuarioPorEmail(String email) {
+		Usuario usuario = null;
+		
+		try {
+			Connection bancoConexao = ConexaoBanco.conectaBanco();
+			
+			String sql = "SELECT * FROM `USUARIO` WHERE Email = ?";
+			
+			PreparedStatement statement = bancoConexao.prepareStatement(sql);
+			statement.setString(1, email);
+			
+			ResultSet result = statement.executeQuery();
+			
+			while (result.next()) {
+				int usuarioId = result.getInt("Cod_Usuario");
+				String usuarioNome = result.getString("Nome_Razao");
+				String usuarioEmail = result.getString("Email");
+				String usuarioCep = result.getString("Cep");
+				String usuarioRua = result.getString("Rua");
+				int usuarioNumero = result.getInt("Numero");
+				String usuarioCidade = result.getString("Cidade");
+				String usuarioCpf = result.getString("Cpf");
+				String usuarioCnpj = result.getString("Cnpj");
+				Date usuarioDataNasc = result.getDate("Data_Nasc");
+				
+				usuario = new Usuario(
+						usuarioNome,
+						usuarioEmail,
+						usuarioCep,
+						usuarioRua,
+						usuarioNumero,
+						usuarioCidade,
+						usuarioCpf,
+						usuarioCnpj,
+						usuarioDataNasc
+				);
+				usuario.setId(usuarioId);
+			}
+			
+			ConexaoBanco.desconectaBanco();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return usuario;
+	}
+
+	public static Usuario validarUsuarioEmailSenha(String email, String senha) {
+		Usuario usuario = null;
+		
+		try {
+			Connection bancoConexao = ConexaoBanco.conectaBanco();
+			
+			String sql = "SELECT * FROM `USUARIO` WHERE Email = ?";
+			
+			PreparedStatement statement = bancoConexao.prepareStatement(sql);
+			statement.setString(1, email);
+			
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				int usuarioId = result.getInt("Cod_Usuario");
+				String usuarioNome = result.getString("Nome_Razao");
+				String usuarioEmail = result.getString("Email");
+				String usuarioCep = result.getString("Cep");
+				String usuarioRua = result.getString("Rua");
+				int usuarioNumero = result.getInt("Numero");
+				String usuarioCidade = result.getString("Cidade");
+				String usuarioCpf = result.getString("Cpf");
+				String usuarioCnpj = result.getString("Cnpj");
+				Date usuarioDataNasc = result.getDate("Data_Nasc");
+				
+				String usuarioSenha = result.getString("Senha");
+				
+				usuario = new Usuario(
+						usuarioNome,
+						usuarioEmail,
+						usuarioCep,
+						usuarioRua,
+						usuarioNumero,
+						usuarioCidade,
+						usuarioCpf,
+						usuarioCnpj,
+						usuarioDataNasc
+				);
+				usuario.setId(usuarioId);
+				
+				if (!usuarioSenha.equals(senha)) {
+					usuario = null;
+				}
+			}
+			
+			ConexaoBanco.desconectaBanco();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return usuario;
 	}
 }
