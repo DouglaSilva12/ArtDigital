@@ -1,6 +1,7 @@
 # Java related
 target/**
 *.class
+build/**
 
 # eclipse specific
 *.pydevproject
