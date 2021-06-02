@@ -18,13 +18,17 @@
     	document.getElementById('headerButtonLogin').classList.add("disabled");
     	
     	<%
-    	boolean atributo = (boolean) session.getAttribute("cadastradoSucesso");
+    	Object cadastradoSucesso = session.getAttribute("cadastradoSucesso");
     	
-    	if (atributo) {
-    		%>
-    		alert("Usuario criado com sucesso!");
-    		<%
-    		session.setAttribute("cadastradoSucesso", false);
+    	if (cadastradoSucesso != null) {
+    		boolean atributo = (boolean) cadastradoSucesso;
+        	
+        	if (atributo) {
+        		%>
+        		alert("Usuario criado com sucesso!");
+        		<%
+        		session.setAttribute("cadastradoSucesso", false);
+        	}	
     	}
     	%>
     </script>
