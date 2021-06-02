@@ -16,21 +16,6 @@
     
     <script type="text/javascript">
     	document.getElementById('headerButtonLogin').classList.add("disabled");
-    	
-    	<%
-    	Object cadastradoSucesso = session.getAttribute("cadastradoSucesso");
-    	
-    	if (cadastradoSucesso != null) {
-    		boolean atributo = (boolean) cadastradoSucesso;
-        	
-        	if (atributo) {
-        		%>
-        		alert("Usuario criado com sucesso!");
-        		<%
-        		session.setAttribute("cadastradoSucesso", false);
-        	}	
-    	}
-    	%>
     </script>
     
     <main class="flex-shrink-0">

@@ -237,4 +237,27 @@ public abstract class UsuarioDAO {
 		
 		return usuario;
 	}
+
+	public static boolean deletarUsuario(int id) {
+		boolean usuarioDeletadoSucesso = false;
+		
+		try {
+			Connection conn = ConexaoBanco.conectaBanco();
+			
+			String sql = "DELETE FROM `USUARIO` WHERE Cod_Usuario = ?";
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			
+			int rowsDeleted = statement.executeUpdate();
+			if (rowsDeleted > 0)
+				usuarioDeletadoSucesso = true;
+			
+			ConexaoBanco.desconectaBanco();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return usuarioDeletadoSucesso;
+	}
 }

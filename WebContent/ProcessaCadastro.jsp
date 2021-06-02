@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script>
 	<%
 	String nome = (String) request.getParameter("inputName");
 	String email = (String) request.getParameter("emailInput");
@@ -58,16 +59,12 @@
 	);
 	
 	if (UsuarioDAO.criarUsuario(usuario, senha)) {
-		session.setAttribute("cadastradoSucesso", true);
-		response.sendRedirect("./Login.jsp");
+		out.print(String.format("alert('Usuario %s cadastrado com sucesso!')", usuario.getNome()));
 	} else {
-		%>
-		<script>
-			window.alert("Falha ao criar usuario");
-			window.history.back();
-		</script>
-		<%
+		out.print("alert('Falha ao criar usuario.')");
 	}
 	%>
+	window.location = './Login.jsp';
+</script>
 </body>
 </html>

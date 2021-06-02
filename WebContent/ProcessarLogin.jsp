@@ -18,14 +18,18 @@
 	Usuario usuarioValidado = UsuarioDAO.validarUsuarioEmailSenha(email, senha);
 	
 	if (usuarioValidado == null) {
-		%>
-		<script>window.history.back();</script>
-		<%
+		%><script>
+			alert('Credenciais incorretas ou inexistentes no banco de dados')
+			window.history.back();
+		</script><%
 	} else {
 		session.setAttribute("usuarioValidado", usuarioValidado);
-		
-		response.sendRedirect("./Usuario.jsp");
+		%><script>
+			alert('Login realizado com sucesso!');
+			window.location = './Usuario.jsp';
+		</script><%
 	}
 	%>
+</script>
 </body>
 </html>
