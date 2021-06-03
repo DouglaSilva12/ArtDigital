@@ -12,7 +12,7 @@
     <title>Entrar | ArtDigital</title>
 </head>
 <body>
-    <%@include file='elements/header.html' %>
+    <%@include file='elements/Header.jsp' %>
     
     <script type="text/javascript">
     	document.getElementById('headerButtonLogin').classList.add("disabled");

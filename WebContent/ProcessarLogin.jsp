@@ -25,7 +25,6 @@
 	} else {
 		session.setAttribute("usuarioValidado", usuarioValidado);
 		%><script>
-			alert('Login realizado com sucesso!');
 			window.location = './Usuario.jsp';
 		</script><%
 	}

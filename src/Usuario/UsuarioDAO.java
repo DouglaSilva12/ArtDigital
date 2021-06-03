@@ -260,4 +260,36 @@ public abstract class UsuarioDAO {
 		
 		return usuarioDeletadoSucesso;
 	}
+
+	public static boolean atualizarUsuario(Usuario usuario) {
+		boolean usuarioAtualizadoSucesso = false;
+		
+		try {
+			Connection conn = ConexaoBanco.conectaBanco();
+			
+			String sql = "UPDATE `USUARIO` SET Nome_Razao=?, Email=?, Rua=?, Cep=?, Numero=?, Cidade=?, Data_Nasc=? WHERE Cod_Usuario=?";
+			 
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, usuario.getNome());
+			statement.setString(2, usuario.getEmail());
+			statement.setString(3, usuario.getRua());
+			statement.setString(4, usuario.getCep());
+			statement.setInt(5, usuario.getNumero());
+			statement.setString(6, usuario.getCidade());
+			statement.setDate(7, usuario.getDataNasc());
+
+			statement.setInt(8, usuario.getId());
+			 
+			int rowsUpdated = statement.executeUpdate();
+			if (rowsUpdated > 0) {
+			    usuarioAtualizadoSucesso = true;
+			}
+			
+			ConexaoBanco.desconectaBanco();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return usuarioAtualizadoSucesso;
+	}
 }

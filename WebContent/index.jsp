@@ -12,7 +12,7 @@
     <title>ArtDigital</title>
 </head>
 <body>
-    <%@include file='elements/header.html' %>
+    <%@include file='elements/Header.jsp' %>
     
     <main class="flex-shrink-0">
       <div class="container p-5">

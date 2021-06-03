@@ -12,7 +12,7 @@
     <title>Cadastro | ArtDigital</title>
 </head>
 <body>
-    <%@include file='elements/header.html' %>
+    <%@include file='elements/Header.jsp' %>
     
     <script type="text/javascript">
     	document.getElementById('headerButtonSignup').classList.add("disabled");
@@ -95,8 +95,8 @@
           </div>
           <div class="col-12">
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-              <button class="btn btn-outline-secundary" onclick="history.back()">Voltar</button>
-              <button type="submit" class="btn btn-outline-primary" onclick="verificarSenha()">Continuar</button>
+              <button class="btn btn-secundary" onclick="history.back()">Voltar</button>
+              <button type="submit" class="btn btn-primary">Continuar</button>
             </div>
           </div>
         </form>
