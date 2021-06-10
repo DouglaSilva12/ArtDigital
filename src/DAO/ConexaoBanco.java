@@ -3,27 +3,38 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConexaoBanco {
+public abstract class ConexaoBanco {
 	
-	Connection con;
-	String url = "jdbc:mysql://localhost:3306/?user=root?useTimezone=true&serverTimezone=UTC";
-	String user = "root";
-	String senha = "1234";
+	private static Connection con = null;
 	
-	public Connection conectaBanco() throws Exception {
+	private final static String url = "jdbc:mysql://172.17.0.2:3306/ARTDIGITAL";
+	private final static String user = "root";
+	private final static String senha = "my-secret-pw";
+
+	public static Connection conectaBanco(){
 		if(con == null) {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(url, user, senha);
-			System.out.println("Conex�o realizada com sucesso!");
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				con = DriverManager.getConnection(url, user, senha);
+				System.out.println("Conexão realizada com sucesso!");
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				System.out.println("Erro na conexão com o banco de dados");
+			}
 		}
 		return con;
 	}
 	
-	public void desconectaBanco() throws Exception{
+	public static void desconectaBanco() {
 		if(con != null) {
-			con.close();
-			con = null;
-			System.out.println("Conex�o fechada com sucesso!");
+			try {
+				con.close();
+				con = null;
+				System.out.println("Conexão fechada com sucesso!");
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				System.out.println("Erro ao fechar conexão com o banco de dados");
+			}
 		}
 	}
 }

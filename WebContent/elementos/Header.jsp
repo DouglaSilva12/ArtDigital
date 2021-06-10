@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<body>
-		<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 border-bottom">
+<%@page import="Usuario.Usuario"%>
+<body>
+	<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 border-bottom">
 	      <a href="./index.jsp" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
 	        <img src="./img/logo.png" alt="" height="30">
 	      </a>
@@ -22,11 +21,22 @@
 	        <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
 	        <li><a href="#" class="nav-link px-2 link-dark">Sobre</a></li>
 	      </ul>
-	  
 	      <div class="col-md-3 text-end">
-	        <a class="btn btn-outline-primary" href="./Login.jsp" role="button" id="headerButtonLogin">Entrar</a>
-	        <a class="btn btn-primary" href="./Cadastro.jsp" role="button" id="headerButtonSignup">Cadastrar</a>
+		  	<%
+			if (session.getAttribute("usuarioValidado") != null) {
+				Usuario headerLogin = (Usuario) session.getAttribute("usuarioValidado");
+		  		%>
+		  		<a class="btn btn-secundary" href="./MinhaConta.jsp" role="button" id="headerButtonLogin"><%=headerLogin.getNome() %></a>
+	        	<a class="btn btn-outline-primary" href="./processamentos/RealizarLogout.jsp" role="button" id="headerButtonLogin">Sair</a>
+		        <%
+			} else {
+		  		%>
+		        <a class="btn btn-outline-primary" href="./Login.jsp" role="button" id="headerButtonLogin">Entrar</a>
+		        <a class="btn btn-primary" href="./Cadastro.jsp" role="button" id="headerButtonSignup">Cadastrar</a>
+		        <%
+			}
+	        %>
 	      </div>
 	    </header>
-	</body>
+</body>
 </html>
