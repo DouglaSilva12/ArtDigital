@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%@include file='elements/bootstrap5.html' %>
+    <%@include file='elementos/bootstrap5.html' %>
     
     <title>Entrar | ArtDigital</title>
 </head>
 <body>
-    <%@include file='elements/Header.jsp' %>
+    <%@include file='elementos/Header.jsp' %>
     
     <script type="text/javascript">
     	document.getElementById('headerButtonLogin').classList.add("disabled");
@@ -24,7 +24,7 @@
           <h1>Entrar</h1>
           <p>Digite suas credenciais para entrar no sistema!</p>
         </div>
-        <form action="./ProcessarLogin.jsp" method="post" class="row g-3 justify-content-center mx-auto" style="max-width: 500px;">
+        <form action="./processamentos/ProcessarLogin.jsp" method="post" class="row g-3 justify-content-center mx-auto" style="max-width: 500px;">
           <div class="col-md-12">
             <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Email" required>
           </div>
@@ -44,6 +44,6 @@
       </div>
     </main>
 
-    <%@include file='elements/footer.html' %>
+    <%@include file='elementos/footer.html' %>
 </body>
 </html>

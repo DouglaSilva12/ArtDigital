@@ -25,7 +25,7 @@
 	} else {
 		session.setAttribute("usuarioValidado", usuarioValidado);
 		%><script>
-			window.location = './Usuario.jsp';
+			window.location = '../MinhaConta.jsp';
 		</script><%
 	}
 	%>

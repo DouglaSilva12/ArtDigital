@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%@include file='elements/bootstrap5.html' %>
+    <%@include file='elementos/bootstrap5.html' %>
     
     <title>ArtDigital</title>
 </head>
 <body>
-    <%@include file='elements/Header.jsp' %>
+    <%@include file='elementos/Header.jsp' %>
     
     <main class="flex-shrink-0">
       <div class="container p-5">
@@ -93,6 +93,6 @@
       </div>
     </main>
 
-    <%@include file='elements/footer.html' %>
+    <%@include file='elementos/footer.html' %>
 </body>
 </html>

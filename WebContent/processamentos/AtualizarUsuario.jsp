@@ -15,11 +15,16 @@
 <script>
 	<%
 	String nome = (String) request.getParameter("inputName");
-	String email = (String) request.getParameter("emailInput");
 	String rua = (String) request.getParameter("addressInput");
 	String cep = (String) request.getParameter("inputZip");
-	int numero = Integer.parseInt(request.getParameter("numberInput"));
+	int numero = 0;
 	String cidade = (String) request.getParameter("cityInput");
+	
+	try {
+		numero = Integer.parseInt(request.getParameter("numberInput"));
+	} catch (Exception e) {
+		numero = 0;
+	}
 	
 	/* Processando data de nascimento */
 	
@@ -38,7 +43,6 @@
 		Usuario usuario = (Usuario) usuarioValidado;
 		
 		usuario.setNome(nome);
-		usuario.setEmail(email);
 		usuario.setRua(rua);
 		usuario.setCep(cep);
 		usuario.setNumero(numero);
@@ -52,7 +56,7 @@
 		}
 	}
 	%>
-	window.location = './Usuario.jsp';
+	window.location = '../MinhaConta.jsp';
 </script>
 </body>
 </html>

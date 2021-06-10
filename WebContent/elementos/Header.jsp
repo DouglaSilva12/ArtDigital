@@ -26,8 +26,8 @@
 			if (session.getAttribute("usuarioValidado") != null) {
 				Usuario headerLogin = (Usuario) session.getAttribute("usuarioValidado");
 		  		%>
-		  		<a class="btn btn-secundary" href="./Usuario.jsp" role="button" id="headerButtonLogin"><%=headerLogin.getNome() %></a>
-	        	<a class="btn btn-outline-primary" href="./RealizarLogout.jsp" role="button" id="headerButtonLogin">Logout</a>
+		  		<a class="btn btn-secundary" href="./MinhaConta.jsp" role="button" id="headerButtonLogin"><%=headerLogin.getNome() %></a>
+	        	<a class="btn btn-outline-primary" href="./processamentos/RealizarLogout.jsp" role="button" id="headerButtonLogin">Sair</a>
 		        <%
 			} else {
 		  		%>

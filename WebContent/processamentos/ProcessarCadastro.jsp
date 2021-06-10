@@ -9,20 +9,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+<title>Processando Cadastro...</title>
 </head>
 <body>
-<script>
 	<%
 	String nome = (String) request.getParameter("inputName");
 	String email = (String) request.getParameter("emailInput");
 	String rua = (String) request.getParameter("addressInput");
 	String cep = (String) request.getParameter("inputZip");
-	int numero = Integer.parseInt(request.getParameter("numberInput"));
+	Integer numero = 0;
 	String cidade = (String) request.getParameter("cityInput");
 	String cpf = null;
 	String cnpj = null;
 	String senha = (String) request.getParameter("passwordInput");
+	
+	try {
+		numero = Integer.parseInt(request.getParameter("numberInput"));
+	} catch (Exception e) {
+		numero = 0;
+	}
 	
 	/* Processando data de nascimento */
 	
@@ -36,7 +41,6 @@
 	));
 	
 	/* Processando cpf e cnpj */
-	
 	String inputAccountType = (String) request.getParameter("inputAccountType");
 	String inputCpfCnpj = (String) request.getParameter("inputCpfCnpj");
 	
@@ -44,6 +48,20 @@
 		cpf = inputCpfCnpj;
 	} else if (inputAccountType.equals("CNPJ")) {
 		cnpj = inputCpfCnpj;
+	}
+	
+	/* Validando usuarios duplicados */
+	boolean usuarioExiste = false; 
+	
+	if (UsuarioDAO.procurarUsuarioPorEmail(email) != null) {
+		out.print("<script>alert('Já existe um usuário com este Email! Tente outro.');</script>");
+		usuarioExiste = true;
+	} else if (UsuarioDAO.procurarUsuarioPorCpf(cpf) != null) {
+		out.print("<script>alert('Já existe um usuário com este Cpf! Tente outro.');</script>");
+		usuarioExiste = true;
+	} else if (UsuarioDAO.procurarUsuarioPorCnpj(cnpj) != null) {
+		out.print("<script>alert('Já existe um usuário com este Cnpj! Tente outro.');</script>");
+		usuarioExiste = true;
 	}
 	
 	Usuario usuario = new Usuario(
@@ -58,13 +76,16 @@
 		dataNasc
 	);
 	
-	if (UsuarioDAO.criarUsuario(usuario, senha)) {
-		out.print(String.format("alert('Usuario %s cadastrado com sucesso!')", usuario.getNome()));
+	if (!usuarioExiste) {
+		if (UsuarioDAO.criarUsuario(usuario, senha)) {
+			out.print(String.format("<script>alert('Usuario %s cadastrado com sucesso!');</script>", usuario.getNome()));
+		} else {
+			out.print("<script>alert('Falha ao criar usuario.');</script>");
+		}
+		%><script>window.location = '../Login.jsp';</script><%
 	} else {
-		out.print("alert('Falha ao criar usuario.')");
+		%><script>history.back();</script><%
 	}
 	%>
-	window.location = './Login.jsp';
-</script>
 </body>
 </html>
